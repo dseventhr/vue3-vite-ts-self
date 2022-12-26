@@ -7,7 +7,12 @@ export const fetchTestGet = (data: any) => {
 }
 
 // test post
-export const fetchTestPost = (data: any) => {
+export const registerUserPost = (data: any) => {
   return axios
-    .post('/kaiwu/user_growth/present/changePresentStatus.json', data).then((res: any) => res)
+    .post('http://localhost/api/users', data).then((res: any) => res)
+}
+
+export const fetchArticlesListGet = (data?: any) => {
+  return axios
+    .get('//localhost:3000/api/articles?limit=10&offset=0&tag=dragons&author=admin', { ...data  }).then((res: any) => res)
 }

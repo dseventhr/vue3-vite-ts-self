@@ -8,6 +8,7 @@
 </template>
 <script lang ="ts">
 import { defineComponent, computed, ref } from 'vue'
+import { fetchArticlesListGet } from '../service/test'
 export default defineComponent({
     setup() {
         const num = ref(10)
@@ -18,6 +19,14 @@ export default defineComponent({
         const addCount = () => {
             console.log('addCount func')
         }
+        fetchArticlesListGet({
+            limit: 10,
+            offset: 0,
+            tag: 'dragons',
+            author: 'admin'
+        }).then(res => {
+           console.log(res) 
+        })
         return {
             num,
             result,

@@ -1,8 +1,7 @@
 import { instance as axios, fetchJsonp } from './axios'
-import Vue from 'vue'
-import statusCode from './statusCode'
+import { ElNotification } from 'element-plus'
+import { statusCode } from './statusCode'
 
-const vue = new Vue()
 // const { VUE_APP_BASE_URL: BASE_URL, NODE_ENV } = process.env
 
 // if (location.origin.match(/\.lagou.com/) && NODE_ENV !== 'production') {
@@ -10,6 +9,14 @@ const vue = new Vue()
 // } else {
 //   axios.defaults.baseURL = BASE_URL + '/eduhome'
 // }
+
+interface IErrorResponse {
+  status: number
+}
+interface IError {
+  response: IErrorResponse
+}
+
 // 请求拦截
 axios.interceptors.request.use(
   (request: any) => {
@@ -24,12 +31,12 @@ axios.interceptors.response.use(
     if (!response) return response
     return response
   },
-  (error: any) => {
-    if (statusCode[error.response.status]) {
-      vue.$message.error(
-        `${error.response.status} ${statusCode[error.response.status]}`
-      )
-    }
+  (error: IError) => {
+    ElNotification({
+      title: '请求失败',
+      message: `${error.response.status} ${statusCode[error.response.status]}`,
+      type: 'error'
+    })
   }
 )
 
