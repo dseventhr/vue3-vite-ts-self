@@ -8,9 +8,9 @@
 </template>
 <script lang ="ts">
 import { defineComponent, computed, ref } from 'vue'
-import { fetchArticlesListGet, addArticlePost } from '../service/articles'
-import { loginPost } from '../service/user'
-import { userInfoStore } from '../store/index.ts'
+import { fetchArticlesListGet, addArticlePost } from '@/service/articles'
+import { loginPost } from '@/service/user'
+import { userInfoStore } from '@/store'
 const userStore = userInfoStore()
 export default defineComponent({
     setup() {

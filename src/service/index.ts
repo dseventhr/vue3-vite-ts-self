@@ -3,7 +3,7 @@ import axios, {
 } from 'axios'
 import { ElNotification } from 'element-plus'
 import jsonp from 'jsonp'
-import { userInfoStore } from '../store'
+import { userInfoStore } from '@/store'
 // import * as Cookies from 'js-cookie'
 
 const instance = axios.create({

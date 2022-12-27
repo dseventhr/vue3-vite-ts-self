@@ -1,4 +1,6 @@
-export const statusCode: IErrorCodeStatus = {
+import type statusCode from "@/types/statusCode"
+
+export const statusCode: statusCode = {
   401: 'Unauthorized',
   403: 'Forbidden',
   404: 'Not Found',
