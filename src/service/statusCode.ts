@@ -1,14 +1,3 @@
-interface IErrorCodeStatus {
-  401: string,
-  403: string,
-  404: string,
-  405: string,
-  500: string,
-  501: string,
-  502: string,
-  504: string,
-}
-
 export const statusCode: IErrorCodeStatus = {
   401: 'Unauthorized',
   403: 'Forbidden',
