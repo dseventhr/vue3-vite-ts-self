@@ -1,4 +1,4 @@
-import { instance as axios, fetchJsonp } from '../index.ts'
+import { instance as axios, fetchJsonp } from '../index'
 
 export const loginPost = (data?: any) => {
     return axios

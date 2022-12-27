@@ -1,11 +1,8 @@
-
-export interface ITableRenderList {
-    avatar: string,
-    username: string,
-    mobile: string,
-    role?: number | null,
-    user_id?: string
-}
-export interface ISubmitForm extends ITableRenderList {
-    password: string
+export interface IUserInfo {
+    bio: string;
+    email: string;
+    image: string;
+    token: string;
+    username: string;
+    _id: string;
 }

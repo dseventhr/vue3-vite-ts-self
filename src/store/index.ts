@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
+import type { IUserInfo } from '../types/user'
 
 export const userInfoStore = defineStore('userInfo', {
     state: () => {
         return {
-            userInfo: {
+            userInfo<IUserInfo>: {
                 bio: null,
                 email: "",
                 image: null,
@@ -14,12 +15,12 @@ export const userInfoStore = defineStore('userInfo', {
         }
     },
     actions: {
-        setUserInfo: function (user: any) {
+        setUserInfo: function (user: IUserInfo) {
             this.userInfo = user
         }
     },
     getters: {
-        getUserInfo: (state): any => {
+        getUserInfo: (state: any): IUserInfo => {
             return state.userInfo
         }
     }

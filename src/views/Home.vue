@@ -8,8 +8,8 @@
 </template>
 <script lang ="ts">
 import { defineComponent, computed, ref } from 'vue'
-import { fetchArticlesListGet, addArticlePost } from '../service/test'
-import { loginPost } from '../service/User'
+import { fetchArticlesListGet, addArticlePost } from '../service/articles'
+import { loginPost } from '../service/user'
 import { userInfoStore } from '../store/index.ts'
 const userStore = userInfoStore()
 export default defineComponent({
@@ -18,11 +18,11 @@ export default defineComponent({
         const result = ref({})
         const testApi = () => {
             addArticlePost({
-                "article": {
-                    "title": "本地测试 title",
-                    "description": "本地测试 description?",
-                    "body": "本地测试 body",
-                    "tagList": ["self"]
+                article: {
+                    title: "本地测试 title",
+                    description: "本地测试 description?",
+                    body: "本地测试 body",
+                    tagList: ["self"]
                 }
             }).then(res => {
                 console.log(res)
