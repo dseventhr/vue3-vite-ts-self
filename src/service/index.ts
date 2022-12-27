@@ -1,59 +1,111 @@
-import { instance as axios, fetchJsonp } from './axios'
+import axios, {
+    AxiosRequestConfig, AxiosResponse, AxiosError
+} from 'axios'
 import { ElNotification } from 'element-plus'
-import { statusCode } from './statusCode'
+import jsonp from 'jsonp'
+import { userInfoStore } from '../store'
+// import * as Cookies from 'js-cookie'
 
-// const { VUE_APP_BASE_URL: BASE_URL, NODE_ENV } = process.env
+const instance = axios.create({
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzQ3ZDkwNWQ3YTkzNDA1YzZhMmVhZGUiLCJpYXQiOjE2NjU3Mjk5NzQsImV4cCI6MTY2NjMzNDc3NH0.hQp46ibujQn9Klq7pn18QzHrwVk-Kv_YVjDpV9uWaFU'
+    },
+    withCredentials: false,
+})
 
-// if (location.origin.match(/\.lagou.com/) && NODE_ENV !== 'production') {
-//   axios.defaults.baseURL = '/api'
-// } else {
-//   axios.defaults.baseURL = BASE_URL + '/eduhome'
-// }
+//请求错误异常处理
+const ErrorHandle = (error: any): Promise<AxiosError> => {
+    if (error.response) {
+        let { status } = error.response
+        let message = ''
+        switch (status) {
+            case 400:
+                message = '请求错误(400)'
+                break
+            case 401:
+                message = '未授权，将重新登录(401)'
+                break
+            case 403:
+                message = '拒绝访问(403)'
+                break
+            case 404:
+                message = '请求出错(404)'
+                break
+            case 408:
+                message = '请求超时(408)'
+                break
+            case 500:
+                message = '服务器错误(500)'
+                break
+            case 501:
+                message = '服务未实现(501)'
+                break
+            case 502:
+                message = '网络错误(502)'
+                break
+            case 503:
+                message = '服务不可用(503)'
+                break
+            case 504:
+                message = '网络超时(504)'
+                break
+            case 505:
+                message = 'HTTP版本不受支持(505)'
+                break
+            default:
+                message = `连接出错(${status})!`
+        }
+        message = `${message}，请检查网络或联系管理员！`
+        ElNotification({
+            title: '请求失败',
+            message: message,
+            type: 'error'
+        })
+    }
+    return Promise.reject(error)
 
-interface IErrorResponse {
-  status: number
 }
-interface IError {
-  response: IErrorResponse
-}
-
 // 请求拦截
-axios.interceptors.request.use(
-  (request: any) => {
-    return request
-  },
-  (error: any) => {}
+instance.interceptors.request.use((config: AxiosRequestConfig) => {
+    const userStore = userInfoStore()
+    if (userStore.getUserInfo && userStore.getUserInfo.token) {
+        config.headers.Authorization = `Bearer ${userStore.getUserInfo.token}`
+    }
+    return config
+    },
+    ErrorHandle
 )
 
 // 响应拦截
-axios.interceptors.response.use(
-  (response: any) => {
-    if (!response) return response
-    return response
-  },
-  (error: IError) => {
-    ElNotification({
-      title: '请求失败',
-      message: `${error.response.status} ${statusCode[error.response.status]}`,
-      type: 'error'
-    })
-  }
+instance.interceptors.response.use(
+    (response: AxiosResponse<any>) => {
+        return response.data
+    },
+    ErrorHandle
 )
 
-// test接口
-export const testGet = () => {
-  return axios.get('getUserInfo', { params: { uid: 1 } })
+function fetchJsonp(url: string, params: any) {
+    let requestUrl: string = url
+    if (params) {
+        const timeStamp: string = new Date().toString()
+        params._ = Date.parse(timeStamp)
+        const dataString: string = url.indexOf('?') === -1 ? '?' : '&'
+        requestUrl = `${requestUrl}${dataString}`
+        for (const k in params) {
+            requestUrl += `&${k}=${params[k]}`
+        }
+    }
+    return new Promise((resolve, reject) => {
+        jsonp(requestUrl, { param: 'jsoncallback' }, (err: any, res: any) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res)
+            }
+        })
+    })
 }
 
-export const testPost = () => {
-  return axios.post('saveUserInfo', { data: { name: 'username' } })
-}
-
-export const testFetchJsonp = (params: any) => {
-  return fetchJsonp(
-    `https://passport.lagou.com/login/sendVerifyCode.json`,
-    params
-  )
-}
-
-export default axios
+export { instance, fetchJsonp }

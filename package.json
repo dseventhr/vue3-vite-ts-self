@@ -13,7 +13,7 @@
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
     "@types/jsonp": "^0.2.1",
-    "axios": "^1.2.1",
+    "axios": "^0.24.0",
     "element-plus": "^2.2.27",
     "js-cookie": "^3.0.1",
     "jsonp": "^0.2.1",
