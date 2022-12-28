@@ -1,7 +1,7 @@
 export interface IUserInfo {
-    bio: string;
+    bio: string | null;
     email: string;
-    image: string;
+    image: string | null;
     token: string;
     username: string;
     _id: string;

@@ -19,7 +19,7 @@ export default defineComponent({
         const testApi = () => {
             addArticlePost({
                 article: {
-                    title: "本地测试 title",
+                    title: `本地测试 title ${new Date().getTime()}`,
                     description: "本地测试 description?",
                     body: "本地测试 body",
                     tagList: ["self"]
@@ -45,8 +45,7 @@ export default defineComponent({
                 password: "123456"
             }
         }).then(res => {
-           console.log(res) 
-           userStore.setUserInfo(res)
+            userStore.setUserInfo(res)
         })
         
         

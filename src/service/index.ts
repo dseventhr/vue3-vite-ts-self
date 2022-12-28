@@ -1,16 +1,12 @@
-import axios, {
-    AxiosRequestConfig, AxiosResponse, AxiosError
-} from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { ElNotification } from 'element-plus'
 import jsonp from 'jsonp'
 import { userInfoStore } from '@/store'
-// import * as Cookies from 'js-cookie'
 
 const instance = axios.create({
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',
-        // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzQ3ZDkwNWQ3YTkzNDA1YzZhMmVhZGUiLCJpYXQiOjE2NjU3Mjk5NzQsImV4cCI6MTY2NjMzNDc3NH0.hQp46ibujQn9Klq7pn18QzHrwVk-Kv_YVjDpV9uWaFU'
     },
     withCredentials: false,
 })
@@ -70,8 +66,8 @@ const ErrorHandle = (error: any): Promise<AxiosError> => {
 // 请求拦截
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
     const userStore = userInfoStore()
-    if (userStore.getUserInfo && userStore.getUserInfo.token) {
-        config.headers.Authorization = `Bearer ${userStore.getUserInfo.token}`
+    if (userStore.getUserInfo()?.token) {
+        config.headers!.Authorization = `Bearer ${userStore.getUserInfo().token}`
     }
     return config
     },

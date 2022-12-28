@@ -8,5 +8,5 @@ export const fetchArticlesListGet = (data: ISearchArticles) => {
 
 export const addArticlePost = (data: IAddArticle) => {
   return axios
-    .post('//localhost:3000/api/articles', data).then((res: any) => res)
+    .post('/api/articles', data).then((res: any) => res)
 }

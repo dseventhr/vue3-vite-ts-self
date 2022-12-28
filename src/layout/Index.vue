@@ -23,17 +23,22 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .app-wrapper {
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     .app-slide {
-        width: 200px;
+        width: 270px;
         transition: width 0.3s linear;
     }
     .side-collpase {
         width: 64px;
     }
     .head-container {
-        height: auto;
-        padding: 0 20px 0 0;
+        height: 100px;
+        line-height: 100px;
+        padding: 0 40px;
+        box-sizing: border-box;
+        background-color: #F2F7FF;
+        border-radius: 40px 0 0 0;
     }
     .main-container {
         padding: 0;
