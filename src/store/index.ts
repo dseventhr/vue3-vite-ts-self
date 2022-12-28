@@ -12,11 +12,11 @@ export const userInfoStore = defineStore('userInfo', () => {
         _id: ""
     })
     
-    function setUserInfo(user: IUserInfo) {
+    const setUserInfo = (user: IUserInfo) => {
         userInfo = user
     }
     
-    function getUserInfo(): IUserInfo {
+    const getUserInfo = (): IUserInfo => {
         return userInfo
     }
     
