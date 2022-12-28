@@ -3,6 +3,7 @@
         <el-aside class="app-slide">
             aside
         </el-aside>
+        <RightAside />
         <el-container class="app-main">
             <el-header class="head-container">
                 header
@@ -16,15 +17,16 @@
 <script  lang="ts">
 import { defineComponent, computed } from 'vue'
 import ViewContent from './components/ViewContent.vue'
+import RightAside from './components/RightAside.vue'
 
 export default defineComponent({
-    components: { ViewContent }
+    components: { ViewContent, RightAside }
 })
 </script>
 <style lang="scss">
 .app-wrapper {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     .app-slide {
         width: 270px;
         transition: width 0.3s linear;
@@ -32,24 +34,29 @@ export default defineComponent({
     .side-collpase {
         width: 64px;
     }
+    .app-main {
+        padding-right: 120px;
+        box-sizing: border-box;
+    }
     .head-container {
         height: 100px;
         line-height: 100px;
-        padding: 0 40px;
+        padding: 0 20px;
         box-sizing: border-box;
         background-color: #F2F7FF;
         border-radius: 40px 0 0 0;
     }
     .main-container {
-        padding: 0;
-        overflow-x: hidden;
-        /*  headnav  50   pagetags 35*/
-        min-height: calc(100vh - 50px - 35px);
         width: 100%;
+        min-height: calc(100vh - 100px);
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-x: hidden;
         position: relative;
         overflow: hidden;
-        background: #f3f5f8;
         font-size: 0.88rem;
+        background-color: #F2F7FF;
+        border-radius: 0 0 0 40px;
     }
 }
 </style>

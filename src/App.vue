@@ -22,6 +22,6 @@ export default defineComponent({
 <style>
 #app {
   color: #2c3e50;
-  height: 100vh;
+  height: 100%;
 }
 </style>
