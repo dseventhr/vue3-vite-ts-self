@@ -1,9 +1,10 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 import MenuTree from './MenuTree.vue';
+import MenuHead from './MenuHead.vue';
 
 export default defineComponent({
-    components: { MenuTree },
+    components: { MenuTree, MenuHead },
     setup() {
         const handleOpen = (key: string, keyPath: string[]) => {
             console.log(key, keyPath)
@@ -156,7 +157,7 @@ export default defineComponent({
 
 <template>
     <div class="menu-container">
-        <div class="menu-head">menu head</div>
+        <MenuHead />
         <div class="menu-main">
             <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
                 <MenuTree :menu-list="menuList"/>
@@ -169,13 +170,6 @@ export default defineComponent({
 .menu-container {
     width: 100%;
     height: 100%;
-
-    .menu-head {
-        width: 100%;
-        height: 100px;
-        padding: 20px;
-        box-sizing: border-box;
-    }
 
     .menu-main {
         width: 100%;

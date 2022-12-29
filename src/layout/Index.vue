@@ -1,11 +1,12 @@
 <script  lang="ts">
 import { defineComponent, computed } from 'vue'
+import Header from '@/components/Header/Index.vue'
 import ViewContent from './components/ViewContent.vue'
 import RightAside from './components/RightAside.vue'
 import Menu from './components/Menu.vue'
 
 export default defineComponent({
-    components: { ViewContent, RightAside, Menu }
+    components: { ViewContent, RightAside, Menu, Header }
 })
 </script>
 
@@ -17,7 +18,7 @@ export default defineComponent({
         <RightAside />
         <el-container class="app-main">
             <el-header class="head-container">
-                header
+                <Header />
             </el-header>
             <el-main class="main-container">
                 <ViewContent />
