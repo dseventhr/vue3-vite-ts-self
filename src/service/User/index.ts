@@ -1,6 +1,6 @@
-import { instance as axios, fetchJsonp } from '../index'
+import { instance as axios } from '../index'
 
 export const loginPost = (data?: any) => {
     return axios
-        .post('//localhost:3000/api/users/login', data).then((res: any) => res)
+        .post('/api/users/login', data).then((res: any) => res)
 }

@@ -1,4 +1,4 @@
-import { instance as axios, fetchJsonp } from '../index'
+import { instance as axios } from '../index'
 import type { IAddArticle, ISearchArticles } from '../../types/articles'
 
 export const fetchArticlesListGet = (data: ISearchArticles) => {

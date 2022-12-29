@@ -1,7 +1,18 @@
+<script  lang="ts">
+import { defineComponent, computed } from 'vue'
+import ViewContent from './components/ViewContent.vue'
+import RightAside from './components/RightAside.vue'
+import Menu from './components/Menu.vue'
+
+export default defineComponent({
+    components: { ViewContent, RightAside, Menu }
+})
+</script>
+
 <template>
     <el-container class="app-wrapper">
         <el-aside class="app-slide">
-            aside
+            <Menu />
         </el-aside>
         <RightAside />
         <el-container class="app-main">
@@ -14,15 +25,7 @@
         </el-container>
     </el-container>
 </template>
-<script  lang="ts">
-import { defineComponent, computed } from 'vue'
-import ViewContent from './components/ViewContent.vue'
-import RightAside from './components/RightAside.vue'
 
-export default defineComponent({
-    components: { ViewContent, RightAside }
-})
-</script>
 <style lang="scss">
 .app-wrapper {
     width: 100%;

@@ -1,11 +1,3 @@
-<template>
-    <div>
-        <el-button type="primary" @click="testApi">testApi</el-button>
-        <el-button type="primary" @click="addCount">addCount</el-button>
-        <p>{{ JSON.stringify(result) }}</p>
-        <div v-for="count in num" :key="count">count+{{ count }}</div>
-    </div>
-</template>
 <script lang ="ts">
 import { defineComponent, computed, ref } from 'vue'
 import { fetchArticlesListGet, addArticlePost } from '@/service/articles'
@@ -41,7 +33,7 @@ export default defineComponent({
         })
         loginPost({
             user: {
-                email: "admin1@abc.com",
+                email: "admin@abc.com",
                 password: "123456"
             }
         }).then(res => {
@@ -58,3 +50,12 @@ export default defineComponent({
     }
 })
 </script>
+
+<template>
+    <div>
+        <el-button type="primary" @click="testApi">testApi</el-button>
+        <el-button type="primary" @click="addCount">addCount</el-button>
+        <p>{{ JSON.stringify(result) }}</p>
+        <div v-for="count in num" :key="count">count+{{ count }}</div>
+    </div>
+</template>
