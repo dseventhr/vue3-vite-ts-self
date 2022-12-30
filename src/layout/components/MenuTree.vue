@@ -8,10 +8,10 @@ export default defineComponent({
 
 <template>
     <span v-for="(menu, index) in menuList" :key="index">
-        <el-menu-item v-if="!menu.children" :index="menu.id">
+        <el-menu-item v-if="!menu.children" :index="menu.path">
             <template #title>{{ menu.name }}</template>
         </el-menu-item>
-        <el-sub-menu v-else :index="menu.id">
+        <el-sub-menu v-else :index="menu.id" :key="index">
             <template #title>{{ menu.name }}</template>
             <MenuTree v-if="menu.children" :menuList="menu.children"></MenuTree>
         </el-sub-menu>

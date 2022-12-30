@@ -1,5 +1,7 @@
-import * as VueRouter from "vue-router";
+import type * as VueRouter from "vue-router";
 import Layout from '@/layout/Index.vue'
+import ListRoute from './List/index'
+
 export type RouterConfig = VueRouter.RouteRecordRaw & { alwaysShow?: boolean }
 /*
   meta: {
@@ -39,5 +41,6 @@ export const routes: Array<RouterConfig> = [
                 title: '首页子集2'
             }
         }]
-    }
+    },
+    ListRoute
 ]
